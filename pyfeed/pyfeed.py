@@ -1,11 +1,11 @@
 #!/venv/bin/env python
 #Copyright Melvin me@melvinphilips.com
-from pyfeedClass import CategorySubCat
-from pyfeedClass import ArticleItem
-from pyfeedClass import Article
-from utilities import *
+from .pyfeedClass import CategorySubCat
+from .pyfeedClass import ArticleItem
+from .pyfeedClass import Article
+from .utilities import *
 import simplejson
-from urllib2 import urlopen
+from urllib.request import urlopen
 from sys import exit
 #class Category(object):
 
@@ -55,11 +55,11 @@ class FeedzillaApi(object):
 					cid=c.getcategoryid(str.lower(category))
 					if cid!=None:
 						finalFeedzillaApi=self.FeedzillaApicategories+str(cid)+self.FeedzillaApiArticles+query
-						print finalFeedzillaApi
+						print(finalFeedzillaApi)
 					else:
 						exit(1)
 				except TypeError:
-					print "Incorrect Type Entered"
+					print("Incorrect Type Entered")
 					exit(1)
 
 			else:
@@ -67,7 +67,7 @@ class FeedzillaApi(object):
 					cid,subid=c.getcategorysubcategoryids(str.lower(category),str.lower(subcategory))
 					finalFeedzillaApi=self.FeedzillaApicategories+str(cid)+self.FeedzillaApiSubcategory+str(subid)+self.FeedzillaApiArticles+query
 				except (TypeError):
-					print "Incorrect Pair of Category and Subcategory Or Incorrect Type Entered"
+					print("Incorrect Pair of Category and Subcategory Or Incorrect Type Entered")
 					exit(1)
 
 			feeds= self.openurldecodesimplejson(finalFeedzillaApi)
@@ -89,7 +89,7 @@ class FeedzillaApi(object):
 			query_data = urlopen(url).read()
 			return simplejson.loads(query_data)
 		except Exception:
-			print "Error in connection to the Internet"
+			print("Error in connection to the Internet")
 			exit(1)
 
 

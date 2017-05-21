@@ -1,7 +1,7 @@
 #!/venv/bin/env python
 #Copyright Melvin me@melvinphilips.com
-import constants
-from utilities import *
+from . import constants
+from .utilities import *
 
 
 class CategorySubCat(object):
@@ -11,18 +11,18 @@ class CategorySubCat(object):
 
 	def getcategoryid(self,category=None):
 		if category is None:
-			return [ x for x in self.categories.keys()]	
+			return [ x for x in list(self.categories.keys())]	
 		try :
 			return self.categories[category]
 		except KeyError:
 			
-			allcat=[x for x in self.categories.keys()]
-			print "Error: Categories should be one of these "+", ".join(allcat)
+			allcat=[x for x in list(self.categories.keys())]
+			print("Error: Categories should be one of these "+", ".join(allcat))
 			return None
 
 	def getcategorysubcategoryids(self,category,subcategory=None):
 		if subcategory is None:
-			return [x[1] for x in self.subcategories.keys() if x[0]==category]
+			return [x[1] for x in list(self.subcategories.keys()) if x[0]==category]
 		try:
 			ret=self.subcategories[category,subcategory]
 			return ret['category_id'],ret['subcategory_id']
